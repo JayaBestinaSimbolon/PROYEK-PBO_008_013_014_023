@@ -10,8 +10,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
-*.jar
+# Package Files (kecuali sqlite-jdbc di lib/)
 *.war
 *.nar
 *.ear
@@ -19,6 +18,15 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash logs
 hs_err_pid*
 replay_pid*
+
+# Hasil compile Java
+out/
+
+# Database SQLite (auto-generated saat program pertama dijalankan)
+asrama.db
+
+# VS Code user settings
+.vscode/settings.json

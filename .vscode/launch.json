@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run Sistem Asrama",
+            "request": "launch",
+            "mainClass": "Main",
+            "classPaths": [
+                "${workspaceFolder}/out",
+                "${workspaceFolder}/lib/sqlite-jdbc-3.47.1.0.jar"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
