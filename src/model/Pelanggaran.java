@@ -1,31 +1,23 @@
 package model;
 
 /**
- * CLASS MODEL: Pelanggaran
- * =========================
- * Class ini merepresentasikan satu record pelanggaran mahasiswa.
- * Setiap kali mahasiswa melanggar, data disimpan di tabel pelanggaran.
- *
- * Konsep OOP: Encapsulation, Class & Object
+ * Entity untuk pelanggaran mahasiswa.
  */
 public class Pelanggaran {
-
-    // === ATRIBUT ===
     private int id;
-    private String nim;          // NIM mahasiswa yang melanggar
-    private String deskripsi;    // contoh: "Pulang lewat jam malam"
-    private int poin;            // contoh: 10
-    private String tanggal;      // format: YYYY-MM-DD
+    private String nim;
+    private String deskripsi;
+    private int poin;
+    private String tanggal; // simpan sebagai String biar simple (diambil dari SQLite)
 
-    // === CONSTRUCTOR (untuk insert baru — id auto dari DB) ===
     public Pelanggaran(String nim, String deskripsi, int poin, String tanggal) {
+        this.id = 0;
         this.nim = nim;
         this.deskripsi = deskripsi;
         this.poin = poin;
         this.tanggal = tanggal;
     }
 
-    // Constructor lengkap (untuk load dari DB yang sudah ada id-nya)
     public Pelanggaran(int id, String nim, String deskripsi, int poin, String tanggal) {
         this.id = id;
         this.nim = nim;
@@ -34,27 +26,35 @@ public class Pelanggaran {
         this.tanggal = tanggal;
     }
 
-    // === GETTER & SETTER ===
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getNim() { return nim; }
-    public void setNim(String nim) { this.nim = nim; }
+    public String getNim() {
+        return nim;
+    }
 
-    public String getDeskripsi() { return deskripsi; }
-    public void setDeskripsi(String deskripsi) { this.deskripsi = deskripsi; }
+    public String getDeskripsi() {
+        return deskripsi;
+    }
 
-    public int getPoin() { return poin; }
-    public void setPoin(int poin) { this.poin = poin; }
+    public int getPoin() {
+        return poin;
+    }
 
-    public String getTanggal() { return tanggal; }
-    public void setTanggal(String tanggal) { this.tanggal = tanggal; }
+    public String getTanggal() {
+        return tanggal;
+    }
 
     @Override
     public String toString() {
-        return String.format(
-            "  [%d] %s | Poin: %d | Tanggal: %s | Ket: %s",
-            id, nim, poin, tanggal, deskripsi
-        );
+        return "Pelanggaran{" +
+                "id=" + id +
+                ", nim='" + nim + '\'' +
+                ", deskripsi='" + deskripsi + '\'' +
+                ", poin=" + poin +
+                ", tanggal='" + tanggal + '\'' +
+                '}';
     }
 }
+

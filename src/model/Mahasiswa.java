@@ -1,40 +1,40 @@
 package model;
 
 /**
- * CLASS CHILD (Mahasiswa)
- * ========================
- * Mahasiswa mewarisi class Person, artinya Mahasiswa punya semua
- * atribut dari Person (nim, nama) ditambah atribut miliknya sendiri:
- * kamar, lantai, dan poinPelanggaran.
- *
- * Konsep OOP: Inheritance (extends), Encapsulation, Override
+ * Mahasiswa adalah child class dari Person.
+ * Menyimpan data penghuni asrama.
  */
 public class Mahasiswa extends Person {
-
-    // === ATRIBUT TAMBAHAN MAHASISWA ===
-    private String kamar;     // contoh: "k1lt2" (kamar 1 lantai 2)
+    private String nim; // PK di database
+    private int kamar;
     private int lantai;
     private int poinPelanggaran;
 
-    // === CONSTRUCTOR ===
-    public Mahasiswa(String nim, String nama, String kamar, int lantai, int poinPelanggaran) {
-        super(nim, nama); // panggil constructor parent (Person)
+    public Mahasiswa(String nim, String nama, int kamar, int lantai) {
+        super(nim, nama);
+        this.nim = nim;
+        this.kamar = kamar;
+        this.lantai = lantai;
+        this.poinPelanggaran = 0;
+    }
+
+    public Mahasiswa(String nim, String nama, int kamar, int lantai, int poinPelanggaran) {
+        super(nim, nama);
+        this.nim = nim;
         this.kamar = kamar;
         this.lantai = lantai;
         this.poinPelanggaran = poinPelanggaran;
     }
 
-    // Constructor tanpa poin (default poin = 0)
-    public Mahasiswa(String nim, String nama, String kamar, int lantai) {
-        this(nim, nama, kamar, lantai, 0);
+    public String getNim() {
+        return nim;
     }
 
-    // === GETTER & SETTER ===
-    public String getKamar() {
+    public int getKamar() {
         return kamar;
     }
 
-    public void setKamar(String kamar) {
+    public void setKamar(int kamar) {
         this.kamar = kamar;
     }
 
@@ -54,19 +54,15 @@ public class Mahasiswa extends Person {
         this.poinPelanggaran = poinPelanggaran;
     }
 
-    public void tambahPoin(int poin) {
-        this.poinPelanggaran += poin;
-    }
-
-    /**
-     * Override method getInfo() dari class Person.
-     * Menampilkan semua informasi mahasiswa dalam 1 baris.
-     */
     @Override
-    public String getInfo() {
-        return String.format(
-            "| %-12s | %-20s | %-8s | Lantai %-2d | Poin: %-3d |",
-            getNim(), getNama(), kamar, lantai, poinPelanggaran
-        );
+    public String toString() {
+        return "Mahasiswa{" +
+                "nim='" + nim + '\'' +
+                ", nama='" + getNama() + '\'' +
+                ", kamar=" + kamar +
+                ", lantai=" + lantai +
+                ", poinPelanggaran=" + poinPelanggaran +
+                '}';
     }
 }
+
