@@ -1,135 +1,96 @@
-# Sistem Pendataan Penghuni Asrama
-> Proyek Mini PBO — JDBC | JCF | ORM Data Mapper | Inheritance
+#Sistem Pendataan Penghuni Asrama
 
-**Kelompok:** 008 | 013 | 014 | 023
+Deskripsi Proyek
+Sistem Pendataan Penghuni Asrama merupakan mini proyek PBO berbasis Java yang dibuat untuk membantu pengelolaan data mahasiswa penghuni asrama. Sistem ini dirancang sederhana namun tetap menerapkan konsep penting dalam pemrograman berorientasi objek dan pengelolaan database.
 
----
+Pada sistem ini, admin dapat menambahkan data penghuni asrama, mencari mahasiswa berdasarkan NIM, melihat isi kamar tertentu, serta mencatat pelanggaran mahasiswa beserta poin pelanggarannya.
 
-## Konsep OOP yang Diterapkan
-
-| Konsep | File Implementasi |
-|--------|--------------------|
-| **Class & Object** | `Mahasiswa.java`, `Pelanggaran.java` |
-| **Encapsulation** | Private fields + getter/setter di semua model |
-| **Inheritance** | `Mahasiswa extends Person` |
-| **Abstraction** | `Person` sebagai abstract class |
-| **Collection (JCF)** | `HashMap<String, Mahasiswa>` di `AsramaService` |
-| **JDBC** | `DatabaseConnection.java` + semua Mapper |
-| **ORM Data Mapper** | `MahasiswaMapper.java`, `PelanggaranMapper.java` |
-
----
-
-## Struktur Folder
-
-```
-PROYEK-PBO_008_013_014_023/
-├── src/
-│   ├── model/
-│   │   ├── Person.java           ← Abstract class (parent)
-│   │   ├── Mahasiswa.java        ← extends Person (child)
-│   │   └── Pelanggaran.java      ← Model pelanggaran
-│   ├── db/
-│   │   └── DatabaseConnection.java  ← Koneksi JDBC ke SQLite
-│   ├── mapper/
-│   │   ├── MahasiswaMapper.java     ← ORM Data Mapper mahasiswa
-│   │   └── PelanggaranMapper.java   ← ORM Data Mapper pelanggaran
-│   ├── service/
-│   │   └── AsramaService.java       ← Logika bisnis + JCF
-│   └── Main.java                    ← Entry point + menu CLI
-├── lib/
-│   └── sqlite-jdbc-3.47.1.0.jar    ← Driver SQLite
-├── out/                             ← Hasil compile (auto-generated)
-├── asrama.db                        ← Database SQLite (auto-generated)
-├── run.bat                          ← Script jalankan program (Windows)
-└── .vscode/
-    ├── tasks.json                   ← Build task VS Code
-    └── launch.json                  ← Run config VS Code
-```
-
----
-
-## Cara Menjalankan
-
-### Cara 1 — Double klik (termudah)
-```
-Double klik file: run.bat
-```
-
-### Cara 2 — Terminal VS Code
-```bash
-# Compile
-javac -cp "lib/sqlite-jdbc-3.47.1.0.jar" -d out src/model/Person.java src/model/Mahasiswa.java src/model/Pelanggaran.java src/db/DatabaseConnection.java src/mapper/MahasiswaMapper.java src/mapper/PelanggaranMapper.java src/service/AsramaService.java src/Main.java
-
-# Jalankan
-java -cp "out;lib/sqlite-jdbc-3.47.1.0.jar" Main
-```
-
-### Cara 3 — VS Code (Ctrl+Shift+B lalu Run)
-1. Buka folder proyek di VS Code
-2. Tekan `Ctrl+Shift+B` → pilih **Compile Java**
-3. Tekan `F5` atau klik tombol Run
-
----
-
-## Fitur Sistem
-
-| Menu | Fitur |
-|------|-------|
-| **1** | Tambah mahasiswa (validasi kapasitas kamar maks 6) |
-| **2** | Tampilkan semua mahasiswa |
-| **3** | Cari mahasiswa berdasarkan NIM |
-| **4** | Tampilkan isi kamar (format: k1lt2) |
-| **5** | Tambah data pelanggaran mahasiswa |
-| **6** | Tampilkan riwayat & total poin pelanggaran |
-| **7** | Hapus data mahasiswa |
-| **0** | Keluar |
-
----
-
-## Desain Database SQLite
-
-### Tabel `mahasiswa`
-```sql
-CREATE TABLE mahasiswa (
-    nim              TEXT PRIMARY KEY,
-    nama             TEXT NOT NULL,
-    kamar            TEXT NOT NULL,
-    lantai           INTEGER NOT NULL,
-    poin_pelanggaran INTEGER DEFAULT 0
-);
-```
-
-### Tabel `pelanggaran`
-```sql
-CREATE TABLE pelanggaran (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    nim       TEXT NOT NULL,
-    deskripsi TEXT NOT NULL,
-    poin      INTEGER NOT NULL,
-    tanggal   TEXT NOT NULL,
-    FOREIGN KEY (nim) REFERENCES mahasiswa(nim)
-);
-```
-
----
-
-## Penjelasan ORM Data Mapper
-
-```
-Database (SQLite)
-      ↕  ← query SQL (INSERT, SELECT, UPDATE)
-  Mapper (MahasiswaMapper / PelanggaranMapper)
-      ↕  ← mengubah ResultSet → Object Java
-Java Object (Mahasiswa / Pelanggaran)
-```
-
-**Keuntungan Data Mapper:**
-- Object Java tidak tahu soal database (clean separation)
-- Mudah diganti database-nya tanpa mengubah model
-- Kode lebih rapi dan mudah ditest
-
----
-
-## Dependency
-- **Java** 17+ (gunakan: `java --version` untuk cek)
-- **sqlite-jdbc** 3.47.1.0 (sudah ada di folder `lib/`)
+Proyek ini dibuat sebagai implementasi dari beberapa materi penting pada mata kuliah Pemrograman Berorientasi Objek (PBO), seperti:
+•	JDBC (Java Database Connectivity)
+•	Java Collection Framework (JCF)
+•	Inheritance
+•	ORM dengan pola Data Mapper
+•	SQLite Database
+ 
+Latar Belakang
+Pendataan penghuni asrama sering kali masih dilakukan secara manual sehingga menyulitkan proses pencarian data mahasiswa, pengecekan kapasitas kamar, maupun pencatatan pelanggaran penghuni.
+Melalui proyek ini, kami mencoba membuat sebuah sistem sederhana yang dapat membantu pengelolaan data penghuni asrama secara lebih terstruktur dan mudah digunakan.
+Selain itu, proyek ini juga menjadi sarana untuk memahami bagaimana Java dapat diintegrasikan dengan database menggunakan JDBC serta bagaimana data pada database dapat direpresentasikan ke dalam object menggunakan konsep ORM.
+ 
+Fitur Sistem
+1. Pendataan Penghuni
+Admin dapat menambahkan data mahasiswa penghuni asrama seperti:
+•	NIM
+•	Nama mahasiswa
+•	Kamar
+•	Lantai
+•	Poin pelanggaran
+2. Pencarian Mahasiswa Berdasarkan NIM
+Sistem dapat mencari data mahasiswa secara langsung menggunakan NIM.
+Contoh:
+ 
+3. Filter dan Pencarian Kamar
+Sistem dapat menampilkan seluruh mahasiswa yang berada pada kamar tertentu.
+Contoh:
+ 
+4. Pembatasan Kapasitas Kamar
+Setiap kamar dibatasi maksimal 6 penghuni.
+Jika kamar penuh, maka sistem akan menolak penambahan penghuni baru.
+ 
+5. Pendataan Pelanggaran
+Admin dapat mencatat pelanggaran mahasiswa beserta poin pelanggarannya.
+Contoh:
+•	Terlambat masuk asrama
+•	Tidak mengikuti piket
+•	Pulang melewati jam malam
+ 
+Teknologi yang Digunakan
+	Teknologi	Keterangan
+	Java	Bahasa pemrograman utama
+	Teknologi	Keterangan
+JDBC	Koneksi Java dengan database
+SQLite	Database lokal
+JCF	Pengelolaan collection data
+VS Code	IDE pengembangan
+SQLite JDBC Driver	Driver koneksi database
+ 
+Konsep PBO yang Diterapkan
+1. Encapsulation
+Data mahasiswa disimpan dalam class dan diakses menggunakan getter dan setter.
+ 
+2. Inheritance
+Class MahasiswaAsrama merupakan turunan dari class Penghuni.
+ 
+3. ORM Data Mapper
+Data pada database diubah menjadi object Java menggunakan class DAO/Data Mapper.
+ 
+4. Java Collection Framework
+ArrayList digunakan untuk menyimpan dan mengelola data mahasiswa.
+ 
+Struktur Database
+Tabel mahasiswa
+	Kolom	Tipe
+nim	TEXT
+nama	TEXT
+kamar	TEXT
+lantai	INTEGER
+Kolom	Tipe  poin
+Tabel pelanggaran
+	Kolom	Tipe
+id	INTEGER
+nim	TEXT
+jenis	TEXT
+poin	INTEGER
+ 
+Struktur Project
+ 
+Alur Sistem
+ 
+ 
+Tujuan Proyek
+Melalui proyek ini, kami ingin memahami:
+•	cara menghubungkan Java dengan database
+•	implementasi konsep OOP dalam project nyata
+•	penggunaan JDBC dalam pengelolaan data
+•	penerapan ORM sederhana menggunakan Data Mapper
+•	pengelolaan data menggunakan Java Collection Framework
