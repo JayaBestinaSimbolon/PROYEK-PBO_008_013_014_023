@@ -28,11 +28,15 @@ Admin dapat menambahkan data mahasiswa penghuni asrama seperti:
 2. Pencarian Mahasiswa Berdasarkan NIM
 Sistem dapat mencari data mahasiswa secara langsung menggunakan NIM.
 Contoh:
+Input : 12S001
+Output: Data mahasiswa ditemukan
  
 3. Filter dan Pencarian Kamar
 Sistem dapat menampilkan seluruh mahasiswa yang berada pada kamar tertentu.
 Contoh:
- 
+Input : k1lt2
+Output: Daftar penghuni kamar lantai 2 kamar 1
+
 4. Pembatasan Kapasitas Kamar
 Setiap kamar dibatasi maksimal 6 penghuni.
 Jika kamar penuh, maka sistem akan menolak penambahan penghuni baru.
@@ -43,16 +47,6 @@ Contoh:
 •	Terlambat masuk asrama
 •	Tidak mengikuti piket
 •	Pulang melewati jam malam
- 
-Teknologi yang Digunakan
-	Teknologi	Keterangan
-	Java	Bahasa pemrograman utama
-	Teknologi	Keterangan
-JDBC	Koneksi Java dengan database
-SQLite	Database lokal
-JCF	Pengelolaan collection data
-VS Code	IDE pengembangan
-SQLite JDBC Driver	Driver koneksi database
  
 Konsep PBO yang Diterapkan
 1. Encapsulation
